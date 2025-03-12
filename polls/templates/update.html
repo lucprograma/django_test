@@ -1,0 +1,9 @@
+{% extends 'navigation.html' %}
+{% block content %}
+    <form action="{% url 'update_tasks' task.id %}" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Update Task</button>
+    </form>
+{% endblock %}

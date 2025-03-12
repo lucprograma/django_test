@@ -1,0 +1,27 @@
+{% extends 'navigation.html' %}
+{% block content %}
+        <div class="container bg-dark text-white pt-5">
+        <h1>Tasks</h1>
+        </div>
+        <div class="table-responsive-md pt-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+        {% for task in tasks %}
+            <tbody>
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.state }}</td>
+                    <td><a href="{% url 'delete_tasks' task.id %}" class="btn btn-primary">Delete</a></td>
+                    <td><a href="{% url 'update_tasks' task.id %}" class="btn btn-primary">Update</a></td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+{% endblock %}
