@@ -1,0 +1,22 @@
+{% extends 'navigation.html' %}
+
+{% block content %}
+    <div class="content-section bg-light mt-4">
+        <form method="post">
+        {% csrf_token %}
+        <fieldset class="form-group ps-5 pt-5">
+        <legend class="border-bottom mb-4">Login</legend>
+        {{ form.as_p }}
+        </fieldset>
+        <div class="form-group ps-5 pt-5">
+            <small>
+                Don't have an account? 
+            </small>
+            <a href="{% url 'register_user' %}">
+                Register here
+            </a>
+        </div>
+        <button type="submit" class="btn btn-dark text-white ms-5">Login</button>
+    </form>
+    </div>
+{% endblock %}

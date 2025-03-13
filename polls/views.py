@@ -39,7 +39,7 @@ def create_task(request):
             form.save(commit=False)
             request.user_id = 1
             form.save()
-            return redirect('index')
+            return redirect('list_tasks')
     else:
         print("Form is invalid")
         form = TaskForm()
