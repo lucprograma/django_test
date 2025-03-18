@@ -13,7 +13,7 @@ def list_tasks(request):
         request: HTTPRequest
     Returns: HTTPResponse
     """
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(user_ref=request.user.id)
     return render(request, "list_tasks.html", {'tasks': tasks})
 def delete_task(request, id):
     """ Deletes a specific task from the database.
@@ -36,9 +36,9 @@ def create_task(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             print("Form is valid")
-            form.save(commit=False)
-            request.user_id = 1
-            form.save()
+            task = form.save(commit=False)
+            task.user_ref_id = request.user.id
+            task.save()
             return redirect('list_tasks')
     else:
         print("Form is invalid")
@@ -55,7 +55,9 @@ def update_task(request, id):
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
-            form.save()
+            # task = form.save(commit=False)
+            # task.user_ref_id = request.user.id
+            task.save()
             return redirect('list_tasks')
     else:
         form = TaskForm(instance=task)
